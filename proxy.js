@@ -23,12 +23,30 @@ const aj = arcjet({
   ],
 });
 
+function hasClientIp(req) {
+  return Boolean(
+    req.ip ||
+      req.headers.get("x-forwarded-for") ||
+      req.headers.get("x-real-ip") ||
+      req.headers.get("cf-connecting-ip")
+  );
+}
+
 export default clerkMiddleware(async (auth, req) => {
   // Skip Arcjet for trusted webhook routes
-  if (!isWebhookRoute(req)) {
-    const decision = await aj.protect(req);
-    if (decision.isDenied()) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const shouldRunArcjet =
+    !isWebhookRoute(req) &&
+    process.env.ARCJET_KEY &&
+    (process.env.ARCJET_ENV !== "development" || hasClientIp(req));
+
+  if (shouldRunArcjet) {
+    try {
+      const decision = await aj.protect(req);
+      if (decision.isDenied()) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      }
+    } catch (error) {
+      console.warn("Arcjet skipped for request:", error?.message ?? error);
     }
   }
 
