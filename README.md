@@ -1,7 +1,7 @@
 # Prept - AI Interview Marketplace 🚀
 
 <div align="center">
-  <img width="100%" alt="prept banner" src="https://github.com/user-attachments/assets/f79664d4-7d61-4067-8c7e-938990d54ca9" />
+
 </div>
 
 <br />
