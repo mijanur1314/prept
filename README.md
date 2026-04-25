@@ -1,144 +1,208 @@
-# Prept - AI Interview Marketplace 🚀
+# Prept
 
-<div align="center">
+Prept is a full-stack interview marketplace built with Next.js 16. It connects interviewees with experienced interviewers for mock interviews, video calls, scheduling, AI-generated questions, AI feedback reports, and interviewer payouts.
 
-</div>
+## Features
 
-<br />
+- Dual-role onboarding for interviewees and interviewers
+- Protected dashboard, explore, payout, and call flows with Clerk auth
+- Stream-powered video calling and chat
+- Credit-based booking system
+- AI question generation and AI feedback using Gemini
+- Interviewer availability and booking management
+- Email notifications with Resend + React Email
+- Arcjet-based protection for production traffic
 
-Prept is a comprehensive, full-stack AI-driven interview preparation marketplace. It bridges the gap between candidates seeking interview practice and industry experts looking to provide mentorship. Featuring live video sessions, real-time chat, and AI-powered feedback analysis using Google Gemini, Prept offers a seamless and structured way to prepare for technical and behavioral interviews.
+## Tech Stack
 
----
+- Next.js 16 App Router
+- React 19
+- Prisma 7 with PostgreSQL
+- Clerk authentication
+- Stream video/chat
+- Google Gemini
+- Arcjet
+- Tailwind CSS 4
+- Shadcn UI
 
-## ✨ Key Features
+## Requirements
 
-- **Dual Roles (Interviewee & Interviewer)**: Users can sign up as either an interviewer (setting availability, rates, and domains) or an interviewee (purchasing credits and booking sessions).
-- **Live Video & Chat Integration**: High-quality, reliable video calls and messaging powered by Stream.
-- **AI Session Feedback**: Automated, structured feedback generation using Google Gemini AI, analyzing technical skills, communication, and problem-solving abilities.
-- **Credit & Payout System**: Built-in virtual economy where interviewees purchase credits to book sessions, and interviewers earn credits that can be cashed out.
-- **Robust Scheduling**: Calendar integration and availability management to avoid double-booking.
-- **Advanced Security**: Integrated bot protection and rate limiting using Arcjet.
-- **Email Notifications**: Automated email alerts for bookings, cancellations, and feedback using Resend.
+- Node.js 18 or newer
+- npm
+- PostgreSQL database
+- Accounts/keys for Clerk, Stream, Gemini, Resend, and Arcjet
 
----
+## Getting Started
 
-## 🛠️ Tech Stack
-
-- **Framework**: [Next.js](https://nextjs.org/) (App Router)
-- **Database**: [PostgreSQL](https://www.postgresql.org/) (Hosted on Supabase/Neon)
-- **ORM**: [Prisma](https://www.prisma.io/)
-- **Authentication**: [Clerk](https://clerk.com/)
-- **Video & Real-time Chat**: [Stream SDK](https://getstream.io/)
-- **AI Engine**: [Google Generative AI (Gemini)](https://ai.google.dev/)
-- **Security**: [Arcjet](https://arcjet.com/)
-- **Emails**: [Resend](https://resend.com/) & [React Email](https://react.email/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [Shadcn UI](https://ui.shadcn.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-
----
-
-## 🚀 Getting Started
-
-Follow these steps to run the project locally on your machine.
-
-### Prerequisites
-
-Ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- A PostgreSQL Database (e.g., [Supabase](https://supabase.com/))
-
-### 1. Clone the repository
+### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/mijanur1314/prept.git
+cd prept
 ```
 
-### 2. Install Dependencies
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Environment Setup
+### 3. Create environment variables
 
-Create a `.env.local` file in the root directory and add the following keys. You will need to create accounts for the respective services to get these API keys.
+This repo currently reads environment variables from `.env`.
+
+Create a `.env` file in the project root:
 
 ```env
-# Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_publishable_key"
-CLERK_SECRET_KEY="your_clerk_secret_key"
+DATABASE_URL="postgresql://..."
 
-# Database (PostgreSQL via Supabase/Neon)
-DATABASE_URL="postgresql://user:password@host:6543/postgres?pgbouncer=true"
-DIRECT_URL="postgresql://user:password@host:5432/postgres"
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="..."
+CLERK_SECRET_KEY="..."
 
-# Stream (Video Calling & Chat)
-NEXT_PUBLIC_STREAM_API_KEY="your_stream_api_key"
-STREAM_SECRET_KEY="your_stream_secret_key"
+NEXT_PUBLIC_STREAM_API_KEY="..."
+STREAM_SECRET_KEY="..."
 
-# Google Gemini (AI Feedback Generation)
-GEMINI_API_KEY="your_gemini_api_key"
+GEMINI_API_KEY="..."
+RESEND_API_KEY="..."
 
-# Resend (Email Notifications)
-RESEND_API_KEY="your_resend_api_key"
+ARCJET_KEY="..."
+ARCJET_ENV="development"
 
-# Arcjet (Bot Protection / Security)
-ARCJET_KEY="your_arcjet_key"
-
-# App URL & Admin
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
-ADMIN_PAYOUT_PASSWORD="your_custom_admin_password"
+ADMIN_PAYOUT_PASSWORD="change-me"
 ```
 
-### 4. Database Setup
+### 4. Set up the database
 
-Generate the Prisma client and push the schema to your database to create the necessary tables:
+Generate the Prisma client:
 
 ```bash
 npx prisma generate
+```
+
+Apply the existing schema to your database:
+
+```bash
 npx prisma db push
 ```
 
-*(Optional)* Seed the database with initial dummy data:
+If you prefer migrations:
+
 ```bash
-node prisma/seed.js
+npx prisma migrate deploy
 ```
 
-### 5. Run the Application
-
-Start the Next.js development server:
+### 5. Start the app
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the application running.
+Open the local URL shown in the terminal. It is usually `http://localhost:3000`, but Next.js may choose another port if `3000` is already in use.
 
----
+## Production Commands
 
-## 📁 Project Structure
+Build the app:
 
-```text
-├── actions/         # Server actions for database operations and business logic
-├── app/             # Next.js App Router pages and API routes
-├── components/      # Reusable React components (UI and functional)
-├── emails/          # React Email templates for notifications
-├── hooks/           # Custom React hooks
-├── lib/             # Utility functions, Prisma client setup, and configurations
-├── prisma/          # Prisma schema and database seed script
-└── public/          # Static assets (images, icons)
+```bash
+npm run build
 ```
 
----
+Start the production server:
 
-## 👨‍💻 Author
+```bash
+npm run start
+```
 
-Made with ❤️ by Mijanur
+Run lint:
 
----
+```bash
+npm run lint
+```
 
-## 📄 License
+## Environment Variable Notes
 
-This project is open-source and available under the [MIT License](LICENSE).
+- `DATABASE_URL` is required by Prisma and the seed script.
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` are required for authentication.
+- `NEXT_PUBLIC_STREAM_API_KEY` and `STREAM_SECRET_KEY` are required for video calling and call creation.
+- `GEMINI_API_KEY` is required for AI question generation and feedback generation.
+- `RESEND_API_KEY` is required for email delivery.
+- `ARCJET_KEY` enables Arcjet in middleware.
+- `ARCJET_ENV=development` is recommended locally so missing client IPs do not break protected routes during development.
+- `NEXT_PUBLIC_APP_URL` is used for generated links.
+- `ADMIN_PAYOUT_PASSWORD` protects payout review actions.
+
+## Database Model Overview
+
+Core models in Prisma:
+
+- `User`
+- `Availability`
+- `Booking`
+- `Feedback`
+- `CreditTransaction`
+- `Payout`
+
+The Prisma client is generated into [lib/generated/prisma](/c:/Users/Sk%20Mijanur%20Rahaman/OneDrive/Desktop/prep/lib/generated/prisma), and the adapter-based Prisma setup lives in [lib/prisma.js](/c:/Users/Sk%20Mijanur%20Rahaman/OneDrive/Desktop/prep/lib/prisma.js).
+
+## Project Structure
+
+```text
+actions/      Server actions and business logic
+app/          Next.js routes, layouts, and API handlers
+components/   UI components and route-specific components
+emails/       React Email templates
+hooks/        Custom hooks
+lib/          Shared utilities, Prisma, Arcjet helpers, and app data
+prisma/       Prisma schema, migrations, and seed helpers
+public/       Static assets
+```
+
+## Local Troubleshooting
+
+### Dev server lock error
+
+If you see a message like `Unable to acquire lock at .next/dev/lock`, an old Next.js dev process is still running.
+
+Stop old Node processes and restart:
+
+```powershell
+Get-Process node
+Stop-Process -Id <PID> -Force
+npm run dev
+```
+
+If needed, remove the stale lock directory:
+
+```powershell
+Remove-Item -Recurse -Force .next\dev
+```
+
+### Protected routes crash locally
+
+If protected routes like `/onboarding` or `/explore` fail locally, make sure:
+
+- `ARCJET_ENV="development"` is set in `.env`
+- you restarted the server after changing env vars
+
+### Redirects on protected routes
+
+Routes such as `/onboarding`, `/explore`, `/dashboard`, and payout/call pages are protected. If you are not signed in, redirects are expected behavior.
+
+## Seed Script Note
+
+The seed file in [prisma/seed.js](/c:/Users/Sk%20Mijanur%20Rahaman/OneDrive/Desktop/prep/prisma/seed.js) is not a general sample-data seeder. It is a targeted script for attaching feedback to a specific booking after you update the hardcoded booking ID inside the file.
+
+## Deployment Notes
+
+Before deploying:
+
+- configure all required environment variables in your hosting platform
+- provision a PostgreSQL database
+- run `npm run build` successfully
+- verify Clerk, Stream, Gemini, Resend, and Arcjet keys are valid
+- ensure `NEXT_PUBLIC_APP_URL` matches your deployed domain
+
+## Author
+
+Built by Mijanur.
