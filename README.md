@@ -432,6 +432,8 @@ This project is licensed under the [MIT License](LICENSE).
 ## 👨‍💻 Author
 
 **Sk Mijanur Rahaman**  
+Frontend Developer · Full Stack Enthusiast
+[GitHub](https://github.com/mijanur1314)
 
 ---
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { completeOnboarding } from "@/actions/onboarding";
 import { GoldTitle, GrayTitle, SectionLabel } from "@/components/reusables";
@@ -26,9 +26,12 @@ export default function OnboardingPage() {
 
   useEffect(() => {
     if (data && !loading) {
-      router.push(role === "INTERVIEWER" ? "/dashboard" : "/explore");
+      startTransition(() => {
+        router.refresh();
+        router.replace(data.redirectTo ?? "/explore");
+      });
     }
-  }, [data, loading, role, router]);
+  }, [data, loading, router]);
 
   const toggleCategory = (val) => {
     setForm((prev) => ({
@@ -218,7 +221,7 @@ export default function OnboardingPage() {
                 ? "Setting up your account..."
                 : role === "INTERVIEWER"
                   ? "Create interviewer profile ->"
-                  : "Go to dashboard ->"}
+                  : "Go to explore ->"}
             </Button>
           </div>
         )}
