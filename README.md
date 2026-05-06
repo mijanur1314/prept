@@ -12,6 +12,7 @@ A comprehensive full-stack AI-powered interview preparation platform that connec
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat&logo=prisma&logoColor=white)](https://www.prisma.io/)
 [![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=flat&logo=clerk&logoColor=white)](https://clerk.com/)
+[![Stripe](https://img.shields.io/badge/Stripe-008CDD?style=flat&logo=stripe&logoColor=white)](https://stripe.com/)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=flat&logo=vercel)](https://prept-lovat.vercel.app/)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-prept--lovat.vercel.app-22c55e?style=flat&logo=vercel&logoColor=white)](https://prept-lovat.vercel.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat)](LICENSE)
@@ -58,6 +59,8 @@ A comprehensive full-stack AI-powered interview preparation platform that connec
 
 ### 💳 Credits & Payments
 - **Credit Wallet**: Purchase and manage interview credits
+- **Stripe Checkout**: Secure payment gateway for buying plans (Starter/Pro)
+- **Webhook Integration**: Real-time credit delivery via Stripe Webhooks
 - **Booking System**: Spend credits to book sessions with interviewers
 - **Interviewer Payouts**: Earn and withdraw credits per completed session
 - **Admin Payout Panel**: Secure admin interface for managing payouts
@@ -86,6 +89,7 @@ A comprehensive full-stack AI-powered interview preparation platform that connec
 | **Backend**    | Next.js Server Actions                  |
 | **Database**   | PostgreSQL + Prisma ORM                 |
 | **Auth**       | Clerk                                   |
+| **Payments**   | Stripe                                  |
 | **Video**      | Stream                                  |
 | **AI**         | Google Gemini                           |
 | **Email**      | Resend                                  |
@@ -145,6 +149,7 @@ Before you begin, ensure you have the following installed:
 | Service | Purpose | Sign Up |
 |---------|---------|---------|
 | Clerk | Authentication | [clerk.com](https://clerk.com) |
+| Stripe | Payment Gateway | [stripe.com](https://stripe.com) |
 | Stream | Video & Chat | [getstream.io](https://getstream.io) |
 | Google AI Studio | Gemini AI | [aistudio.google.com](https://aistudio.google.com) |
 | Resend | Email delivery | [resend.com](https://resend.com) |
@@ -187,6 +192,10 @@ STREAM_SECRET_KEY="..."
 
 # Google Gemini — https://aistudio.google.com/app/apikey
 GEMINI_API_KEY="..."
+
+# Stripe — https://dashboard.stripe.com/apikeys
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
 
 # Resend — https://resend.com/api-keys
 RESEND_API_KEY="re_..."
