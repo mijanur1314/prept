@@ -38,6 +38,7 @@
     "sonner": "^2.0.7",
     "stream-chat": "^9.38.0",
     "stream-chat-react": "^13.14.2",
+    "stripe": "^22.1.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

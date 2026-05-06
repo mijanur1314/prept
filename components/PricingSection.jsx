@@ -1,13 +1,16 @@
 "use client";
 
 import { useAuth } from "@clerk/nextjs";
-import { CheckoutButton } from "@clerk/nextjs/experimental";
 import { SignInButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { PLANS } from "@/lib/data";
+import { createCheckoutSession } from "@/actions/stripe";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function PricingSection() {
   const { has, userId } = useAuth();
+  const [isLoading, setIsLoading] = useState(null);
 
   const isSignedIn = !!userId;
   const isOnStarter = isSignedIn && has({ plan: "starter" });
@@ -106,30 +109,26 @@ export default function PricingSection() {
                 </SignInButton>
               )
             ) : isSignedIn ? (
-              <CheckoutButton
-                planId={plan.planId}
-                planPeriod="month"
-                checkoutProps={{
-                  appearance: {
-                    elements: {
-                      drawerRoot: {
-                        zIndex: 2000,
-                      },
-                    },
-                  },
+              <Button
+                variant={plan.featured ? "gold" : "outline"}
+                className="w-full"
+                onClick={async () => {
+                  setIsLoading(plan.slug);
+                  try {
+                    let creditAmount = plan.slug === "starter" ? 5 : 15;
+                    let priceInCents = plan.slug === "starter" ? 2900 : 6900;
+                    const { url } = await createCheckoutSession(creditAmount, priceInCents);
+                    if (url) window.location.href = url;
+                  } catch (error) {
+                    toast.error("Failed to start checkout");
+                  } finally {
+                    setIsLoading(null);
+                  }
                 }}
+                disabled={isLoading === plan.slug}
               >
-                <Button
-                  variant={plan.featured ? "gold" : "outline"}
-                  className="w-full"
-                >
-                  {activePlanSlug === "pro" && plan.slug === "starter"
-                    ? "Downgrade"
-                    : activePlanSlug === "starter" && plan.slug === "pro"
-                    ? "Upgrade →"
-                    : "Get started →"}
-                </Button>
-              </CheckoutButton>
+                {isLoading === plan.slug ? "Loading..." : "Get started →"}
+              </Button>
             ) : (
               // Paid plan, signed out → sign in first
               <SignInButton mode="modal">
