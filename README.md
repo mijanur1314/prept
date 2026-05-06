@@ -6,7 +6,7 @@
 
 A comprehensive full-stack AI-powered interview preparation platform that connects candidates with expert interviewers for real-time mock interviews, AI-generated feedback, and structured career growth.
 
-[![Next.js](https://img.shields.io/badge/Next.js_15-black?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js_16-black?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React_19-20232A?style=flat&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
@@ -80,7 +80,7 @@ A comprehensive full-stack AI-powered interview preparation platform that connec
 
 | Layer          | Technology                              |
 |----------------|-----------------------------------------|
-| **Framework**  | Next.js 15 (App Router)                 |
+| **Framework**  | Next.js 16 (App Router)                 |
 | **UI**         | React 19, Tailwind CSS, shadcn/ui       |
 | **Language**   | TypeScript                              |
 | **Backend**    | Next.js Server Actions                  |
@@ -98,7 +98,7 @@ A comprehensive full-stack AI-powered interview preparation platform that connec
 
 ```text
 ┌──────────────────────────────────────────────────────────────┐
-│                    Frontend (Next.js 15)                     │
+│                    Frontend (Next.js 16)                     │
 │                                                              │
 │  ┌─────────────┐  ┌─────────────┐  ┌──────────────────────┐  │
 │  │  Candidate  │  │ Interviewer │  │       Admin          │  │
@@ -432,8 +432,6 @@ This project is licensed under the [MIT License](LICENSE).
 ## 👨‍💻 Author
 
 **Sk Mijanur Rahaman**  
-Frontend Developer · Full Stack Enthusiast
-[GitHub](https://github.com/mijanur1314)
 
 ---
 
